@@ -2,9 +2,10 @@
   class CardsProcessor {
 
     constructor(order) {
-      this.localStorage = w.localStorage;
-
-      this._setOrder(verbs);
+      this.storage = w.localStorage;
+      this.$root = $('body .main-wrapper');
+      this.$translations = this.$root.find('.translation');
+      this._setOrder(order);
     }
 
     init() {
@@ -16,18 +17,36 @@
       this.currentCard.vanish();
       this.updateProgress();
       this.id = this.order.unshift;
+    }
 
+    _subscribeShowTranslation() {
+      this.$translations.click(function (e) {
+        let $this = $(this).
+            FLIP_CLASS = "flip";
+        $this.toggleClass(FLIP_CLASS);
+      });
     }
 
 
-    _setOrder() {
-      if (typeof(Storage) !== "undefined" && localStorage.getItem("order")) {
-        this.order = JSON.parse(localStorage.getItem("order"));
+    _setOrder(order) {
+      if (typeof(Storage) == "undefined") {
+        // without support will constantly update progress on reload
+        // TODO: should warn user about legacy browser
+        this.order = order;
       } else {
-        this.verbs = verbs;
+        let stored_order = this.storage.getItem("order");
+
+        if (stored_order) {
+          this.order = JSON.parse(stored_order);
+        } else {
+          this.storage.setItem("order", JSON.stringify(order))
+          this.order = order;
+        }
       }
     }
 
-
   }
+
+  if (!w.irven) {w.irven = {}}
+  w.irven.CardsProcessor = CardsProcessor;
 })(window, jQuery);

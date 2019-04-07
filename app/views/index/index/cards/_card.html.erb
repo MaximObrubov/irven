@@ -3,12 +3,14 @@
   <div class="card-body">
     <div class="card-title"><%= verb.infinitiv %></div>
 
-    <div class="translation">
-      <div class="dummy">
-        Show translation
-      </div>
-      <div class="translation">
-        <%= verb.translations %>
+    <div class="flip-card translation">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span>Show translation</span>
+        </div>
+        <div class="flip-card-back">
+          <%= verb.translations %>
+        </div>
       </div>
     </div>
 
@@ -19,7 +21,9 @@
       <%= f.text_field :partizip_zwei, placeholder: :partizip_zwei %>
       <% end %>
     </div>
-    <a href="#" class="btn btn-primary">Check</a>
+    <div class="btn-container">
+      <a href="#" class="btn btn-primary">Check</a>
+    </div>
   </div>
 
 </div>
