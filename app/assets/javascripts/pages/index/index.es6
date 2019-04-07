@@ -21,18 +21,20 @@
 
     showNext() {
       let self = this;
-      console.log(this.order);
-
       if (this.$currentCard) {
         this.updateProgress();
         this.$currentCard.fadeOut();
       }
+
       this.$currentCard = this.$root.find(`.verb-card.verb-${this.order.shift()}`);
       this.$currentCard.fadeIn(400);
       this.$checkBtn = this.$currentCard.find('.card-check');
       this.$checkBtn.on("click", function (e) {
-        if (self._isCorrect(this.$currentCard)) {
+        e.preventDefault();
+        if (self._isCorrect(self.$currentCard)) {
           self.showNext();
+        } else {
+          console.log("not correct");
         }
       })
     }
@@ -49,16 +51,24 @@
 
 
     _isCorrect($card) {
-      console.log($card)
-      // TODO: realize card check
+      let $inputs = $card.find(".answer-container input[type='text']"),
+          results = [];
+
+      $inputs.each(function (index, el) {
+        let $input = $(el),
+            value = el.value.trim(),
+            answer = $input.data('answer').trim(),
+            result = value == answer;
+        result ? $input.addClass("is-valid") : $input.addClass("is-invalid");
+        results.push(result)
+      });
+      // return results.every((res) => {res == true});
       return true;
     }
 
 
     _updateOrder() {
       if (typeof(Storage) !== "undefined") {
-
-        console.log(this.order)
         this.storage.setItem("order", JSON.stringify(this.order));
       }
     }
