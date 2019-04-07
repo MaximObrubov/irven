@@ -1,7 +1,7 @@
-<div class="card">
+<div class="verb-card">
 
   <div class="card-body">
-    <h5 class="card-title"><%= verb.infinitiv %></h5>
+    <div class="card-title"><%= verb.infinitiv %></div>
 
     <div class="translation">
       <div class="dummy">
@@ -13,10 +13,10 @@
     </div>
 
     <div class="answer-container">
-      <%= form_with model: verb, url: root_path do |f| %>
-      <%= f.text_field :presens %>
-      <%= f.text_field :preteritum %>
-      <%= f.text_field :partizip_zwei %>
+      <%= form_with url: root_path do |f| %>
+      <%= f.text_field :presens, placeholder: "presens" %>
+      <%= f.text_field :preteritum, placeholder: "preteritum" %>
+      <%= f.text_field :partizip_zwei, placeholder: :partizip_zwei %>
       <% end %>
     </div>
     <a href="#" class="btn btn-primary">Check</a>

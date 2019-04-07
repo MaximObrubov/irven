@@ -1,9 +1,18 @@
 // Place all the styles related to the index controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .index {
   .progress-container {
     margin-bottom: 30px;
+  }
+  .verb-card {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    .card-title {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 44px;
+      color: $primary;
+    }
   }
 }

@@ -1,2 +1,11 @@
 <%= render 'index/index/progress' %>
 <%= render 'index/index/cards' %>
+
+<script type="text/ecmascript">
+  (function (w, $) {
+    if (w.irven.CardsProcessor) {
+      // verbs are shuffled from the server
+      new w.irven.CardsProcessor(<%= @order.to_json %>);
+    }
+  })(window, jQuery);
+</script>
