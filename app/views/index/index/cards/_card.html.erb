@@ -1,1 +1,25 @@
-<%= verb.infinitiv %>
+<div class="card">
+
+  <div class="card-body">
+    <h5 class="card-title"><%= verb.infinitiv %></h5>
+
+    <div class="translation">
+      <div class="dummy">
+        Show translation
+      </div>
+      <div class="translation">
+        <%= verb.translations %>
+      </div>
+    </div>
+
+    <div class="answer-container">
+      <%= form_with model: verb, url: root_path do |f| %>
+      <%= f.text_field :presens %>
+      <%= f.text_field :preteritum %>
+      <%= f.text_field :partizip_zwei %>
+      <% end %>
+    </div>
+    <a href="#" class="btn btn-primary">Check</a>
+  </div>
+
+</div>

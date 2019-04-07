@@ -2,6 +2,10 @@ $footer-heigth: 56px;
 
 html, body { height: 100%; }
 
+.navbar {
+  margin-bottom: 30px;
+}
+
 .main-wrapper { min-height: 100%; }
 .main-container {
   overflow: auto;
