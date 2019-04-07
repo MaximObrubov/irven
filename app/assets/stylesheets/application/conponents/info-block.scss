@@ -1,0 +1,28 @@
+.info-block {
+  $icon-size: 20px;
+  $icon-color: #1ba3bb;
+  display: block;
+  padding-left: $icon-size + 10;
+  position: relative;
+  margin-bottom: 20px;
+  font-size: $icon-size - 6;
+  color: $icon-color;
+  &:before {
+    content: "i";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background: $icon-color;
+    text-align: center;
+    font-size: $icon-size * 0.75;
+    font-weight: bold;
+    width: $icon-size;
+    height: $icon-size;
+    line-height: $icon-size;
+    color: #fff;
+
+  }
+
+}
