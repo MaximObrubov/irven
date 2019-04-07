@@ -1,0 +1,28 @@
+<% unless @verbs.empty? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Infinitiv</th>
+        <th>Translation</th>
+        <th>Presens</th>
+        <th>Preteritum</th>
+        <th>Partizip zwei</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @verbs.each do |v| %>
+        <tr>
+          <td><%= v.infinitiv %></td>
+          <td><%= v.translations %></td>
+          <td><%= v.presens %></td>
+          <td><%= v.preteritum %></td>
+          <td><%= v.partizip_zwei %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">
+    No verbs in current database
+  </div>
+<% end %>
