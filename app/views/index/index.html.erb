@@ -5,7 +5,7 @@
   (function (w, $) {
     if (w.irven.CardsProcessor) {
       // verbs are shuffled from the server
-      new w.irven.CardsProcessor(<%= @order.to_json %>);
+      new w.irven.CardsProcessor(<%= @order.to_json %>).showNext();
     }
   })(window, jQuery);
 </script>
