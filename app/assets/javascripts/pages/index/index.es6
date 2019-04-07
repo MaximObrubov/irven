@@ -22,10 +22,11 @@
     showNext() {
       let self = this;
       if (this.$currentCard) {
-        this.updateProgress();
-        this.$currentCard.fadeOut();
+        this._updateOrder();
+        this.$currentCard.hide();
       }
 
+      this.updateProgress();
       this.$currentCard = this.$root.find(`.verb-card.verb-${this.order.shift()}`);
       this.$currentCard.fadeIn(400);
       this.$checkBtn = this.$currentCard.find('.card-check');
@@ -40,8 +41,7 @@
     }
 
     updateProgress() {
-      this._updateOrder();
-      this.$progressBar.width(`${ 100 * parseInt(1 - this.order.length/this.count)}%`);
+      this.$progressBar.width(`${parseInt(100 *(1 - this.order.length/this.count))}%`);
     }
 
     resetProgress() {
