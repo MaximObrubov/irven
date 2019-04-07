@@ -10,8 +10,13 @@
   </head>
 
   <body>
-    <%= render 'layouts/base/header'%>
-    <%= yield %>
+
+    <div class="main-wrapper">
+      <%= render 'layouts/base/header'%>
+      <div class="main-container container clear-top">
+        <%= yield %>
+      </div>
+    </div>
     <%= render 'layouts/base/footer'%>
   </body>
 </html>

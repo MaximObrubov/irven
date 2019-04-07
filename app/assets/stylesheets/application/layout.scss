@@ -1,0 +1,14 @@
+$footer-heigth: 56px;
+
+html, body { height: 100%; }
+
+.main-wrapper { min-height: 100%; }
+.main-container {
+  overflow: auto;
+  padding-bottom: $footer-heigth;
+}
+
+footer {
+  margin-top: -$footer-heigth;
+  height: $footer-heigth;
+}
