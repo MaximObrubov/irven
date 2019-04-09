@@ -5,14 +5,19 @@
       this.storage = w.localStorage;
       this.$root = $('body .main-wrapper');
       this.$translations = this.$root.find('.translation');
-      this.$progress = this.$root.find(".progress")
-      this.$progressBar = this.$progress.find(".progress-bar")
+      this.$progress = this.$root.find(".progress");
+      this.$progressBar = this.$progress.find(".progress-bar");
 
+      if (!w.irven.KeyboardDe) {
+        throw "German keyboard not loaded";
+      }
+      this.keyboard = new w.irven.KeyboardDe();
       // this.storage.clear();
       this._setOrder(order);
     }
 
     init() {
+      this.keyboard.draw();
       // TODO: now translations showed on hover
       // needs to be on click
       // this._subscribeShowTranslation();
@@ -30,9 +35,18 @@
       this.$currentCard = this.$root.find(`.verb-card.verb-${this.order.shift()}`);
       this.$currentCard.fadeIn(400);
       this.$checkBtn = this.$currentCard.find('.card-check');
+
+      let $inputs = this.$currentCard.find(".answer-container input[type='text']");
+
+      $inputs.focus(function (event) {
+        let $input = $(this);
+        self.keyboard.unsubscribe($input);
+        self.keyboard.subscribe($input);
+      });
+
       this.$checkBtn.on("click", function (e) {
         e.preventDefault();
-        if (self._isCorrect(self.$currentCard)) {
+        if (self._isCorrect($inputs)) {
           self.showNext();
         } else {
           console.log("not correct");
@@ -50,9 +64,8 @@
     }
 
 
-    _isCorrect($card) {
-      let $inputs = $card.find(".answer-container input[type='text']"),
-          results = [];
+    _isCorrect($inputs) {
+      let results = [];
 
       $inputs.each(function (index, el) {
         let $input = $(el),
