@@ -1,0 +1,11 @@
+.irven-keyboard {
+  position: absolute;
+  margin: 0 auto;
+  bottom: 0;
+  padding: 1.25rem;
+  &-keysblock {
+    &-key {
+      margin: 0 0 0 4px;
+    }
+  }
+}

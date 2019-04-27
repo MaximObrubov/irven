@@ -4,6 +4,7 @@
     constructor(order) {
       this.storage = w.localStorage;
       this.$root = $('body .main-wrapper');
+      this.$cardsContainer = this.$root.find(".cards");
       this.$translations = this.$root.find('.translation');
       this.$progress = this.$root.find(".progress");
       this.$progressBar = this.$progress.find(".progress-bar");
@@ -11,8 +12,7 @@
       if (!w.irven.KeyboardDe) {
         throw "German keyboard not loaded";
       }
-      this.keyboard = new w.irven.KeyboardDe();
-      // this.storage.clear();
+      this.keyboard = new w.irven.KeyboardDe(this.$cardsContainer);
       this._setOrder(order);
     }
 
@@ -44,14 +44,25 @@
         self.keyboard.subscribe($input);
       });
 
+      $inputs.on("keyup", function (e) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          self.check($inputs);
+        }
+      });
+
       this.$checkBtn.on("click", function (e) {
         e.preventDefault();
-        if (self._isCorrect($inputs)) {
-          self.showNext();
-        } else {
-          console.log("not correct");
-        }
+        self.check($inputs);
       })
+    }
+
+    check($inputs) {
+      if (this._isCorrect($inputs)) {
+        this.showNext();
+      } else {
+        console.log("not correct");
+      }
     }
 
     updateProgress() {
@@ -72,11 +83,13 @@
             value = el.value.trim(),
             answer = $input.data('answer').trim(),
             result = value == answer;
+        $input.removeClass("is-valid");
+        $input.removeClass("is-invalid");
         result ? $input.addClass("is-valid") : $input.addClass("is-invalid");
         results.push(result)
       });
-      // return results.every((res) => {res == true});
-      return true;
+
+      return results.every((res) => {return res == true});
     }
 
 

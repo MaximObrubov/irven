@@ -1,14 +1,26 @@
 ;((w, $) => {
   class KeyboardDe {
 
-    constructor($input) {
+    constructor($parent) {
       this.KLASS = "irven-keyboard";
-      this.$root = $('body');
+      this.$parent = $parent;
       this.specials = {
-        estset:  {symbol: "\u00DF"}, // ß
-        aUmlaut: {symbol: "\u00E4"}, // ä
-        oUmlaut: {symbol: "\u00F6"}, // ö
-        uUmlaut: {symbol: "\u00FC"}, // ü
+        estset:  {
+          symbol: "\u00DF",
+          key: 83
+        }, // ß
+        aUmlaut: {
+          symbol: "\u00E4",
+          key: 65
+        }, // ä
+        oUmlaut: {
+          symbol: "\u00F6",
+          key: 79
+        }, // ö
+        uUmlaut: {
+          symbol: "\u00FC",
+          key: 85
+        }, // ü
       };
     }
 
@@ -24,7 +36,7 @@
         $keysblock.append($btn);
         self.specials[key].btn = $btn;
       });
-      $main.append($keysblock).appendTo(self.$root);
+      $main.append($keysblock).appendTo(self.$parent);
     }
 
     subscribe($input) {
@@ -32,7 +44,12 @@
         spec.btn.on("mousedown", function (e) {
           $input.val($input.val() + spec.symbol);
           setTimeout(function() {$input.focus();}, 0)
-
+        });
+        $input.on("keydown", function (e) {
+          if (e.shiftKey && e.keyCode == spec.key) {
+            e.preventDefault();
+            $input.val($input.val() + spec.symbol);
+          }
         });
       }
     }
