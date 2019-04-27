@@ -94,6 +94,7 @@
         $tip.removeClass("shown");
         $input.addClass(result ? "is-valid" : "is-invalid");
         if (!result) {
+          // TODO: tips should be only for 3 seconds, then fade away
           $tip.addClass("shown");
         }
         results.push(result)
