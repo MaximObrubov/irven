@@ -57,7 +57,8 @@
 
     unsubscribe($input) {
       for (let [key, spec] of Object.entries(this.specials)) {
-        spec.btn.off();
+        $input.off("keydown");
+        spec.btn.off("mousedown");
       }
     }
 
