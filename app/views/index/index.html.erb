@@ -5,6 +5,8 @@
   (function (w, $) {
     if (w.irven.CardsProcessor) {
       // verbs are shuffled from the server
+      // TODO: no need to pass whole list for each request
+      // if no verbst in local storage then ajax for verbs
       let cp = new w.irven.CardsProcessor(<%= @order.to_json %>);
       cp.init();
       cp.showNext()

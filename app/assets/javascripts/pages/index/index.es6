@@ -18,6 +18,7 @@
 
     init() {
       this.keyboard.draw();
+      this.updateProgress();
       // TODO: now translations showed on hover
       // needs to be on click
       // this._subscribeShowTranslation();
@@ -54,10 +55,14 @@
 
     check($inputs) {
       if (this._isCorrect($inputs)) {
+        let self = this;
         this._updateOrder();
-        this.$currentCard.hide();
         this.updateProgress();
-        this.showNext();
+        this.$checkBtn.addClass("btn-success");
+        setTimeout(function () {
+          self.$currentCard.hide();
+          self.showNext();
+        }, 1000);
       } else {
         console.log("not correct");
       }
@@ -74,16 +79,23 @@
 
 
     _isCorrect($inputs) {
-      let results = [];
+      let self = this,
+          results = [];
 
       $inputs.each(function (index, el) {
         let $input = $(el),
+            $tip = $($input.data("tip")),
             value = el.value.trim(),
             answer = $input.data('answer').trim(),
             result = value == answer;
         $input.removeClass("is-valid");
         $input.removeClass("is-invalid");
-        result ? $input.addClass("is-valid") : $input.addClass("is-invalid");
+        $input.removeClass("tipped");
+        $tip.removeClass("shown");
+        $input.addClass(result ? "is-valid" : "is-invalid");
+        if (!result) {
+          $tip.addClass("shown");
+        }
         results.push(result)
       });
 

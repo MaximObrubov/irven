@@ -15,24 +15,18 @@
     </div>
 
     <div class="answer-container">
+      <% targets = [:presens, :preteritum, :partizip_zwei] %>
       <%= form_with url: root_path, authenticity_token: false do |f| %>
-
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <%= f.text_field :presens, placeholder: :presens, class: 'form-control', data: {answer: verb.presens} %>
+        <% targets.each do |symbol| %>
+          <div class="form-group row">
+            <div class="col-sm-12 input-container">
+              <%= f.text_field symbol, placeholder: symbol, class: 'form-control verb-input', data: {answer: verb[symbol], tip: "#tip-#{verb.id}-#{symbol.id2name}"} %>
+              <div id="tip-<%= verb.id %>-<%= symbol.id2name %>" class="input-tip alert alert-danger">
+                <%= verb[symbol] %>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <%= f.text_field :preteritum, placeholder: :preteritum, class: 'form-control', data: {answer: verb.preteritum} %>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <%= f.text_field :partizip_zwei, placeholder: :partizip_zwei, class: 'form-control', data: {answer: verb.partizip_zwei} %>
-          </div>
-        </div>
-
+        <% end %>
       <% end %>
     </div>
     <div class="btn-container">
