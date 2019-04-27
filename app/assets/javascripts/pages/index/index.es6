@@ -25,14 +25,9 @@
     }
 
     showNext() {
-      let self = this;
-      if (this.$currentCard) {
-        this._updateOrder();
-        this.$currentCard.hide();
-      }
-
-      this.updateProgress();
-      this.$currentCard = this.$root.find(`.verb-card.verb-${this.order.shift()}`);
+      let self = this,
+          nextId = this.order.shift();
+      this.$currentCard = this.$root.find(`.verb-card.verb-${nextId}`);
       this.$currentCard.fadeIn(400);
       this.$checkBtn = this.$currentCard.find('.card-check');
 
@@ -59,6 +54,9 @@
 
     check($inputs) {
       if (this._isCorrect($inputs)) {
+        this._updateOrder();
+        this.$currentCard.hide();
+        this.updateProgress();
         this.showNext();
       } else {
         console.log("not correct");
