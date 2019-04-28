@@ -47,6 +47,7 @@
         }
       });
 
+      $inputs.eq(0).focus();
       this.$checkBtn.on("click", function (e) {
         e.preventDefault();
         self.check($inputs);

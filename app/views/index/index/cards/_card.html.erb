@@ -15,7 +15,8 @@
     </div>
 
     <div class="answer-container">
-      <% targets = [:presens, :preteritum, :partizip_zwei] %>
+      <%# targets = [:presens, :preteritum, :partizip_zwei] %>
+      <% targets = [:preteritum, :partizip_zwei] %>
       <%= form_with url: root_path, authenticity_token: false do |f| %>
         <% targets.each do |symbol| %>
           <div class="form-group row">
